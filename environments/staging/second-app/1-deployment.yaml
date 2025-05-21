@@ -1,8 +1,9 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx
-  namespace: bar
+  namespace: foo
   labels:
     app: nginx
 spec:

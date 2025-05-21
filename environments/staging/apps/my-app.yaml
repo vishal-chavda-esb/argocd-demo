@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx
+  name: my-app-foo
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/vishal-chavda-esb/argocd-demo.git
     targetRevision: HEAD
-    path: environments/stage/apps
+    path: environments/staging/my-app
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:
@@ -22,5 +22,5 @@ spec:
     syncOptions:
       - Validate=true
       - CreateNamespace=false
-      - PrunePropogationPolicy=foreground
+      - PrunePropagationPolicy=foreground
       - PruneLast=true

@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: myapp-foo
+  name: apps-staging
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,17 +11,16 @@ spec:
   source:
     repoURL: https://github.com/vishal-chavda-esb/argocd-demo.git
     targetRevision: HEAD
-    path: environment/stage/k8s
+    path: environments/staging/apps
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-      allowEmpty: true
+      allowEmpty: false
     syncOptions:
       - Validate=true
       - CreateNamespace=false
-      - PrunePropogationPolicy=foreground
+      - PrunePropagationPolicy=foreground
       - PruneLast=true
-      
