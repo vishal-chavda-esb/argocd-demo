@@ -2,8 +2,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx
-  namespace: argocd
+  name: secondapp-bar
+  namespace: bar
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -11,14 +11,14 @@ spec:
   source:
     repoURL: https://github.com/vishal-chavda-esb/argocd-demo.git
     targetRevision: HEAD
-    path: k8s
+    path: environments/stage/second-app
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-      allowEmpty: false
+      allowEmpty: true
     syncOptions:
       - Validate=true
       - CreateNamespace=false
